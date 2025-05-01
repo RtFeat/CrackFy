@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('django-insecure-_0_n$y7kg$vrfy2x^x23)v7$4$8db8#d=kce3jf%4w&u421^i3')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') ==  True
@@ -138,8 +138,8 @@ SESSION_COOKIE_AGE = 1209600  # 2 недели
 
 LOGOUT_REDIRECT_URL = '/profile/'
 
-MUSIC_API_CLIENT_ID = os.getenv('X6o0q1z6jn8rDcrjYksb')
-MUSIC_API_CLIENT_SECRET = os.getenv('8fd162d28fd162d28fd162d2738cfbc5f588fd18fd162d2e86b60ed90e4969435266264')
+MUSIC_API_CLIENT_ID = os.getenv('API_CLIENT_ID')
+MUSIC_API_CLIENT_SECRET = os.getenv('API_CLIENT_SECRET')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
