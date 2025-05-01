@@ -1,0 +1,17 @@
+{% load static %}
+<header>
+  <ul class="ul_main">
+    <li class="li_burger_menu" id="burger_menu">
+      <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+      <label class="burger" for="burger-checkbox"></label>
+    </li>
+    <li class="li_arrow back-button"><img src="{% static images.Back %}" alt="Back"></li>
+    <li class="li_arrow forward-button"><img src="{% static images.Forward %}" alt="Forward"></li>
+    {% if user.is_authenticated == True %}
+    <li class="li_register"><a href="{% url 'logout' %}">logout</a></li>
+    {% endif %}
+    {% if user.is_authenticated == False %}
+    <li class="li_register"><a href="{% url 'reg_page' %}">Registration</a><a style="margin-left: 20px;" href="{% url 'sign_page'%}">Sign</a></li>
+    {% endif %}
+  </ul>
+</header>

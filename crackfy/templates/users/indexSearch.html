@@ -1,0 +1,77 @@
+{% extends 'blog-base.html' %}
+{% load static %}
+<body>
+{% block content %}
+<div class="container">
+    {% include 'users/header.html'%}
+    <div class="main_search">
+        <div>
+            <header>
+                <ul class="ul_main">
+                    <li class="back-button"><img src="{% static images.Back %}" alt="Back"></li>
+                    <li class="forward-button"><img src="{% static images.Forward %}" alt="Forward"></li>
+                    <li class="main_header_inp">
+                        <form style="position: relative;" method="GET" action="{% url 'search_tracks' %}">
+                            <img class="main_header_searchImg" src="{% static images.Search_S %}" alt="Search_S">
+                            <input placeholder="Artists, songs, or podcasts" class="main_header_inp" type="text"
+                                   name="q" value="{{ request.GET.q }}" id="searchInput" oninput="this.form.submit();">
+                        </form>
+                    </li>
+                    {% if user.is_authenticated == True %}
+                    <li class="li_register"><a href="{% url 'logout' %}">logout</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated == False %}
+                    <li class="li_register"><a href="{% url 'reg_page' %}">Registration</a><a style="margin-left: 20px;"
+                                                                                              href="{% url 'sign_page'%}">Sign</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </header>
+            {% if tracks %}
+            <div class="main_inf">
+                <div class="title">Recent searches</div>
+                <div class="cards_authors cards_author_search">
+                    {% for track in tracks %}
+                    <div class="card_author" 
+                    data-track-url="{{ track.preview }}" 
+                    data-track-name="{{ track.title }}" 
+                    data-track-artists="{{ track.artist }}">
+                        <div style="position: relative;">
+                            <button class="card_author_close"><img src="{% static images.Close_S %}" alt="Close_S"></button>
+                            <img class="img_author" src="{{ track.cover }}" alt="Author">
+                        </div>
+                        <div class="card_name">{{ track.title }}</div>
+                        <div class="artist_favorite">
+                        <div class="cards_about">
+                            <div class="card_about">{{ track.artist }}</div>
+                        </div>
+                        <form class="form_likes" method="post" action="{% url 'add_to_favorites' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="track_id" value="{{ track.id }}">
+                            <button type="button" class="favorite-btn"
+                            data-track-id="{{ track.id }}"
+                            data-title="{{ track.title }}"
+                            data-artist="{{ track.artist }}"
+                            data-cover="{{ track.cover }}"
+                            data-preview="{{ track.preview }}" 
+                            data-album="{{ track.album }}"
+                            data-duration="{{ track.duration }}">
+                            
+                        <img src="{% static images.heartLiked %}" alt="heartLiked" class="heart-icon">
+                    </button>
+                        </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% include 'users/footer.html' %}
+{% endblock %}
+</body>
+</html>

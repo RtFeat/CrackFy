@@ -1,0 +1,119 @@
+{% extends 'blog-base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="{% static 'users/style.css' %}" />
+  <title>CrackFy</title>
+</head>
+
+<body>
+  {% block content %}
+  <div class="container">
+    {% include 'users/header.html'%}
+    <div class="main">
+      <div>
+        {% include 'users/header_1.html'%}
+        <div class="main_inf">
+          <div class="title">Top Authors</div>
+          <div class="cards_authors">
+            <div class="card_author" id="card_1">
+              <div>
+                <img class="img_author" src="{% static images.theweeknd %}" alt="Author" />
+              </div>
+              <div class="card_name">The Weeknd</div>
+              <div class="card_about">Co-created the HBO drama series</div>
+            </div>
+            <div class="card_author" id="card_2">
+              <div>
+                <img class="img_author" src="{% static images.playboi %}" alt="Author" />
+              </div>
+              <div class="card_name">Playboi Carti</div>
+              <div class="card_about">An influential figure among his generation</div>
+            </div>
+            <div class="card_author" id="card_3">
+              <div>
+                <img class="img_author" src="{% static images.rocket %}" alt="Author" />
+              </div>
+              <div class="card_name">ROCKET</div>
+              <div class="card_about">The Best author hits in Russia</div>
+            </div>
+            <div class="card_author" id="card_4">
+              <div>
+                <img class="img_author" src="{% static images.postmalone %}" alt="Author" />
+              </div>
+              <div class="card_name">Post Malone</div>
+              <div class="card_about">hip-hop, pop, R&B, trap</div>
+            </div>
+            <div class="card_author" id="card_5">
+              <div>
+                <img class="img_author" src="{% static images.fendiglock %}" alt="Author" />
+              </div>
+              <div class="card_name">Fendiglock</div>
+              <div class="card_about">Arthur, 2017</div>
+            </div>
+            <div class="card_author" id="card_6">
+              <div>
+                <img class="img_author" src="{% static images.august %}" alt="Author" />
+              </div>
+              <div class="card_name">August</div>
+              <div class="card_about">Russian rap artist from St. Petersburg</div>
+            </div>
+            <div class="card_author" id="card_7">
+              <div>
+                <img class="img_author" src="{% static images.ogbuda %}" alt="Author" />
+              </div>
+              <div class="card_name">Og Buda</div>
+              <div class="card_about">one of the dodik</div>
+            </div>
+            <div class="card_author" id="card_8">
+              <div>
+                <img class="img_author" src="{% static images.163onmyneck %}" alt="Author" />
+              </div>
+              <div class="card_name">163ONMYNECK</div>
+              <div class="card_about">random shit delaet</div>
+            </div>
+            <div class="card_author" id="card_9">
+              <div>
+                <img class="img_author" src="{% static images.kweensize %}" alt="Author" />
+              </div>
+              <div class="card_name">kweensize</div>
+              <div class="card_about">The Best author hits in Russia</div>
+            </div>
+            <div class="card_author" id="card_10">
+              <div>
+                <img class="img_author" src="{% static images.lilmosey %}" alt="Author" />
+              </div>
+              <div class="card_name">Lil Mosey</div>
+              <div class="card_about">HLathan Moses Stanley Echols </div>
+            </div>
+            <div class="card_author" id="card_11">
+              <div>
+                <img class="img_author" src="{% static images.4nway %}" alt="Author" />
+              </div>
+              <div class="card_name">4n Way</div>
+              <div class="card_about">Vyacheslav Pukhov</div>
+            </div>
+            <div class="card_author" id="card_12">
+              <div>
+                <img class="img_author" src="{% static images.august %}" alt="Author" />
+              </div>
+              <div class="card_name">RtFeat</div>
+              <div class="card_about">The Best author hits in Russia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'users/footer.html' %}
+  {% endblock %}
+</body>
+
+  
+</html>

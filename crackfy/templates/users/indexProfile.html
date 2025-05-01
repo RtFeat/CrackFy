@@ -1,0 +1,127 @@
+{% extends 'blog-base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <title>CrackFy</title>
+</head>
+<body>
+    {% block content %}
+<div class="container">
+    {% include 'users/header.html'%}
+    <div id="modal_add_song" class="modal_overlay">
+        <div id="modal_createPlaylist" class="modal_createPlaylist">
+            <div class="modal_content_modal_createPlaylist">
+            <div class="create_playlist_txt">
+                <div class="title_CreatePlaylist">Add Song</div>
+                <div id="Close_CreatePlaylist" class="Close_CreatePlaylist"><img src="{% static images.Close_S %}" alt=""></div>
+            </div>
+            <form id="uploadTrackForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="Createplaylist_img_inp">
+                    <div>
+                        <img id="coverPreview" class="img_ChooseImage" src="{% static images.ChooseImage %}" alt="ChooseImage">
+                        <input type="file" name="cover_image" id="coverImageInput" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="Create_playlist_inp">
+                        <div>
+                            <div class="create_playslist_txt">Name</div>
+                            <input class="inp_create_platlist" type="text" name="title" required>
+                        </div>
+                        <div>
+                            <div class="create_playslist_txt">Artist</div>
+                            <input class="inp_create_platlist" type="text" name="artist">
+                        </div>
+                        <div>
+                            <div class="create_playslist_txt">Album</div>
+                            <input class="inp_create_platlist" type="text" name="album">
+                        </div>
+                        <div class="descr_inp">
+                            <div class="create_playslist_txt">File</div>
+                            <input type="file" name="audio_file" accept="audio/*" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="main_btn_createPlay">
+                    <button type="submit" class="createPlaylist_Btn">UPLOAD</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div>
+            {% include 'users/header_1.html'%}
+            <div class="like_main">
+                <div class="image-container">
+                    <img id="profile-image" class="profile_img" src="{{ user.profile.avatar.url }}" alt="Avatar">
+                    <input type="file" id="avatar-input" style="display: none;">
+                    <div class="change-image-prompt" onclick="document.getElementById('avatar-input').click()">Click to change image</div>
+                </div>
+                <div>
+                    <div class="profile_txt_yl">Your Profile</div>
+                    {% if user.is_authenticated == True %}
+                    <div class="profile_txt_ls">{{ user.username }}</div>
+                    {% endif %}
+                    {% if user.is_authenticated == False %}
+                    <div class="profile_txt_ls">Unknowns<br> Unknowns</div>
+                    {% endif %}
+                    <div class=btn_add_df>
+                        <div class="like_main_txt_ns"><button id="btn_add_songs">Add songs</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="title profile_txt_your_title">Your Songs</div>
+            <div class="Songs_main"></div>
+                <div class="play_panel">
+                    <div><img src="{% static images.Play_Greem %}" alt="Play"></div>
+                </div>
+                <div class="songs_main_tracks_songs">
+                    <div class="songs_main_tracks">
+                        <div class="songs_main_tracks_number">#</div>
+                        <div class="songs_main_tracks_title">TITLE</div>
+                        <div class="songs_main_tracks_album">ALBUM</div>
+                        <div class="songs_main_tracks_like">LIKE</div>
+                        <div class="songs_main_tracks_duration"><img src="{% static images.Clock_XS %}" alt="Clock"></div>
+                    </div>
+                {% for track in user_tracks %}
+            <div class="songs_main_tracks track-item track-load" data-track-id="{{ track.id }}" data-audio-url="{{ track.audio_file.url }}">
+                <div class="songs_main_tracks_number">{{ forloop.counter }}</div>
+                <div class="songs_main_tracks_title songs_main_tracks_cover">
+                    {% if track.cover_image %}
+                    <img class="songs_main_tracks_img_cover" src="{{ track.cover_image.url }}" alt="cover">
+                    {% else %}
+                    <img class="songs_main_tracks_img_cover" src="{% static images.Like %}" alt="cover">
+                    {% endif %}
+                    <div>
+                        <div>{{ track.title }}</div>
+                        <div class="author">{{ track.artist|default:"Unknown" }}</div>
+                    </div>
+                </div>
+                <div class="songs_main_tracks_album">{{ track.album|default:"-" }}</div>
+                <div class="songs_main_tracks_like">
+                    <img src="{% static images.LikeLittle %}" alt="LikeLittle" class="like-button" data-track-id="{{ track.id }}">
+                </div>
+                <div class="songs_main_tracks_duration">{{ track.formatted_duration }}</div>
+            </div>
+            {% empty %}
+            <div class="empty-tracks-message">
+                You haven't uploaded any tracks yet. Click "Add songs" to upload your first track!
+            </div>
+            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'users/footer.html' %}
+        {% endblock %}
+</body>
+
+</html>

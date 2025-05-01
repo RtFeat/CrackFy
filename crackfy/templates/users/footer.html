@@ -1,0 +1,32 @@
+{% load static %}
+<footer class="hide footer_player" id="footer_player">
+    <div class="footer_title">
+        <div>
+            <div></div>
+            <div class="author"></div>
+        </div>
+
+    </div>
+    <div class="footer_panel_range_track">
+        <div class="footer_panel_track">
+            <div><img src="{% static images.playlistRepeat %}" style="background-image: url('{% static images.playlistRepeat %}'); width: 32px; height: 32px; opacity: 0.5;" data-tracknext-icon="{% static images.tracknext %}" data-reapet-icon="{% static images.repeatTrack %}" alt="repeatTrack"></div>
+            <div><img src="{% static images.backTrack %}" alt="backTrack"></div>
+            <button id="playPauseBtn"
+                    style="background-image: url('{% static images.pauseTrack %}'); width: 40px; height: 40px;"
+                    class="play-pause-btn" data-play-icon="{% static images.playTrack %}"
+                    data-pause-icon="{% static images.pauseTrack %}"></button>
+            <div><img src="{% static images.nextTrack %}" alt="nextTrack"></div>
+            <div><img src="{% static images.playlistRepeat %}" alt="nextTrackOnPlaylist"></div>
+            </div>
+        <div class="footer_panel_range_time">
+            <div id="currentTime">00:00</div>
+            <input class="footer_inp_range" type="range" id="progressBar" min="0" value="0">
+            <div id="totalDuration">00:00</div>
+        </div>
+    </div>
+    <div class="footer_sound_mixer">
+        <div><img src="{% static images.sound %}" alt="sound"></div>
+        <div><input type="range" id="volumeControl" min="0" max="1" step="0.01"></div>
+    </div>
+    <audio id="audioPlayer" src="{{ track.preview }}"></audio>
+</footer>

@@ -1,0 +1,48 @@
+{% extends 'blog-base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <title>CrackFy</title>
+</head>
+
+<body>
+    {% block content %}
+    <div class="container_1">
+        <div class="modal_windows_register">
+            <div class="modal_register_logoSpotify">
+                <a href="{% url 'home_page' %}"><img class="img_logo_spotify_reg" src="{% static images.Spotify_logo %}" alt="Spotify_logo"></a>
+            </div>
+            <div class="line_border"></div>
+            <div class="main_register">
+                <div class="modal_windows_register_txt">Sign up with your email address</div>
+                <form class="form_register" method="post">
+                    {% csrf_token %}
+                    {{ form.email }}
+                    {{ form.password }}
+                    {{ form.username }}
+                    <div class="txt_marketing">
+                        {{ form.marketing_consent }}
+                        <div>Share my registration data with Spotify's content providers<br> for marketing purposes</div>
+                    </div>
+                    <div class="txt_Terms">By clicking on Sign up, ypo agree to Spotify's <a class="linkTerms" href="https://www.spotify.com/legal">Terms</a> and <a class="linkTerms" href="https://www.spotify.com/legal">Conditions of Use.</a></div>
+                <div class="txt_personalData">To learn mor about how Spotify coolects, uses, shares and protects
+                    your<br> personal data please read <a class="linkTerms" href="https://www.spotify.com/privacy">Spotify's Privacy Policy.</a></div>
+
+                    <div class="btn_reg_sign"><button type="submit" class="btn_sign">SIGN UP</button></div>
+                </form>
+                
+                <div class="LogIn">Already have an account? <a class="linkTerms" href="{% url 'sign_page'%}">Log in</a></div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

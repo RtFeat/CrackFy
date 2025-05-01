@@ -1,0 +1,108 @@
+{% extends 'blog-base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <title>CrackFy</title>
+</head>
+<body>
+    {% block content %}
+<div class="container">
+    {% include 'users/header.html'%}
+    <div id="modal_createPlaylist" class="modal_overlay">
+        <div class="modal_createPlaylist">
+            <div class="modal_content_modal_createPlaylist">
+            <div class="create_playlist_txt">
+                <div class="title_CreatePlaylist">Create Playlist</div>
+                <div id="Close_CreatePlaylist" class="Close_CreatePlaylist"><img src="{% static images.Close_S %}" alt="Close_S"></div>
+            </div>
+            <div class="Createplaylist_img_inp">
+                <div><img class="img_ChooseImage" src="{% static images.ChooseImage %}" alt="ChooseImage"></div>
+                <div class="Create_playlist_inp">
+                    <div>
+                        <div class="create_playslist_txt">Name</div>
+                        <div><input class="inp_create_platlist" type="text" name="" id=""></div>
+                    </div>
+                    <div class="descr_inp">
+                        <div class="create_playslist_txt">Description</div>
+                        <div><input class="inp_create_platlist_2" type="text" name="" id=""></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_btn_createPlay">
+                <button class="createPlaylist_Btn">CREATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div>
+            {% include 'users/header_1.html'%}
+            <div class="like_main">
+                <div><img class="like_img" src="{% static images.Like %}" alt="Like"></div>
+                <div>
+                    <div class="like_main_txt_yl">Your Likes</div>
+                    <div class="like_main_txt_ls">Liked Songs</div>
+                    <div class="like_main_txt_ns">n songs</div>
+                </div>
+            </div>
+            <div class="Songs_main">
+                <div class="play_panel">
+                    <div id="play_btn"><img src="{% static images.Play_Greem %}" alt="Play"></div>
+                </div>
+                <div class="songs_main_tracks_songs">
+                    <div class="songs_main_tracks">
+                        <div class="songs_main_tracks_number">#</div>
+                        <div class="songs_main_tracks_title">TITLE</div>
+                        <div class="songs_main_tracks_album">ALBUM</div>
+                        <div class="songs_main_tracks_like">LIKE</div>
+                        <div class="songs_main_tracks_duration"><img src="{% static images.Clock_XS %}" alt="Clock"></div>
+                    </div>
+                    <div id="Add_your_favorites_tracks"></div>
+                    {% for track in favorites %}
+                        <div class="track-item songs_main_tracks track-load"
+                             data-track-url="{{ track.preview_url }}"
+                             data-track-name="{{ track.title }}"
+                             data-track-artists="{{ track.artist }}"
+                             data-track-id="{{ track.id }}"
+                             data-preview="{{ track.preview_url }}"
+                        >
+                            <div class="songs_main_tracks_number">{{ forloop.counter }}</div>
+                            <div class="songs_main_tracks_title songs_main_tracks_cover">
+                                <img class="songs_main_tracks_img_cover" src="{{ track.cover }}" alt="Обложка {{ track.title }}">
+                                <div>
+                                    <div>{{ track.title }}</div>
+                                    <div class="track_artist">{{ track.artist }}</div>
+                                </div>
+                            </div>
+                            <div class="songs_main_tracks_album">{{ track.album }}</div>
+                            <form method="post" action="{% url 'remove_from_favorites' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="track_id" value="{{ track.track_id }}">
+                                <button class="songs_main_tracks_like" data-track-id="{{ track.track_id }}"
+                                    data-title="{{ track.title }}"
+                                    data-artist="{{ track.artist }}"
+                                    data-preview="{{ track.preview_url }}"
+                                    data-cover="{{ track.cover }}"
+                                    data-album="{{ track.album }}"
+                                    data-duration="{{ track.duration }}">
+                                    <img src="{% static 'users/images/LikeLittle.svg' %}" alt="LikeLittle" class="like-button">
+                                </button>
+                            </form>
+                            <div class="songs_main_tracks_duration">{{ track.formatted_duration }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'users/footer.html' %}
+{% endblock %}
+</body>
+</html>

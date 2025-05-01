@@ -1,0 +1,47 @@
+{% load static %}
+  <header class="header hidden">
+    <ul class="header_ul">
+      <li class="li_header li_header_mtt">
+        <a href="{% url 'home_page'%}">
+          <button type="submit" class="btn_header">
+            <img
+              src="{% static images.Home_Fill_S %}"
+              alt="Home"
+            />Home
+          </button>
+        </a>
+      </li>
+      <li class="li_header">
+        <a href="{% url 'search_tracks'%}">
+          <button type="submit" class="btn_header">
+            <img src="{% static images.Search_S_wh %}" alt="Search" />Search
+          </button>
+        </a>
+      </li>
+{% if user.is_authenticated == True %}
+      <li class="li_header">
+        <a href="{% url 'profile_page'%}">
+          <button type="submit" class="btn_header">
+            <img class="img_author_header" style="filter: invert(1);" src="{% static images.Author %}" alt="Profile" />Profile
+          </button>
+        </a>
+      </li>
+      {% endif %}
+      <li class="li_header li_header_mt">
+
+      </li>
+      <li class="li_header">
+        <a href="{% url 'like_track' %}">
+          <button type="submit" class="btn_header">
+            <img src="{% static images.Liked %}" alt="Liked" />Liked Songs
+          </button>
+        </a>
+      </li>
+    </ul>
+    <div class="line_history"></div>
+    <ul>
+      <a href="https://policies.google.com/privacy"><li class="li_history">Privacy Policy</li></a>
+      <a href="https://github.com/RtFeat"><li class="li_history">Developer</li></a>
+      <a href="https://deezer.com/"><li class="li_history">API Deezer Music</li></a>
+    </ul>
+  </header>
